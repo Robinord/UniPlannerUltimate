@@ -1,0 +1,49 @@
+﻿@model UniPlanner.Models.UniProgramme
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>UniProgramme</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="UniProgrammeID" />
+            <div class="form-group">
+                <label asp-for="UniversityInfoID" class="control-label"></label>
+                <select asp-for="UniversityInfoID" class="form-control" asp-items="ViewBag.UniversityInfoID"></select>
+                <span asp-validation-for="UniversityInfoID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProgrammeID" class="control-label"></label>
+                <select asp-for="ProgrammeID" class="form-control" asp-items="ViewBag.ProgrammeID"></select>
+                <span asp-validation-for="ProgrammeID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Link" class="control-label"></label>
+                <input asp-for="Link" class="form-control" />
+                <span asp-validation-for="Link" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RankScore" class="control-label"></label>
+                <input asp-for="RankScore" class="form-control" />
+                <span asp-validation-for="RankScore" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
