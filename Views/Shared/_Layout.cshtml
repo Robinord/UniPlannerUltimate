@@ -23,9 +23,19 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="UniversityInfo" asp-action="Index">University Info</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Programme" asp-action="Index">Programmes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="UniProgramme" asp-action="Index">Programmes Offered</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="MajorsOffered" asp-action="Index">Majors Offered</a>
                         </li>
                     </ul>
+                    <partial name="_LoginPartial.cshtml"></partial>
                 </div>
             </div>
         </nav>
