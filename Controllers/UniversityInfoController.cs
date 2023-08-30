@@ -58,7 +58,7 @@ namespace UniPlanner.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("UniversityInfoID,Name,City,Region,THErank,QSrank,ARWUrank")] UniversityInfo universityInfo)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 _context.Add(universityInfo);
                 await _context.SaveChangesAsync();
@@ -95,7 +95,7 @@ namespace UniPlanner.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 try
                 {

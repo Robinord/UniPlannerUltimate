@@ -58,7 +58,7 @@ namespace UniPlanner.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ProgrammeID,Name")] Programme programme)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 _context.Add(programme);
                 await _context.SaveChangesAsync();
@@ -95,7 +95,7 @@ namespace UniPlanner.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 try
                 {
