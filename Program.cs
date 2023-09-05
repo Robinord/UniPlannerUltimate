@@ -6,7 +6,7 @@ var connectionString = builder.Configuration.GetConnectionString("UniPlannerCont
 
 builder.Services.AddDbContext<UniPlannerContext>(options => options.UseSqlServer(connectionString));
 
-builder.Services.AddDefaultIdentity<UniPlannerUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<UniPlannerContext>();
+builder.Services.AddDefaultIdentity<UniPlannerUser>(options => options.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<UniPlannerContext>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

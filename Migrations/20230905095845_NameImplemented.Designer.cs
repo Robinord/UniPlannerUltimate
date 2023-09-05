@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UniPlanner.Areas.Identity.Data;
 
@@ -11,9 +12,11 @@ using UniPlanner.Areas.Identity.Data;
 namespace UniPlanner.Migrations
 {
     [DbContext(typeof(UniPlannerContext))]
-    partial class UniPlannerContextModelSnapshot : ModelSnapshot
+    [Migration("20230905095845_NameImplemented")]
+    partial class NameImplemented
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
