@@ -31,13 +31,13 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Link)
+                    <a href=@Html.DisplayFor(modelItem => item.Link)>@Html.DisplayFor(modelItem => item.Programme.Name)</a>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.RankScore)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.UniversityInfo.UniversityInfoID)
+                @Html.DisplayFor(modelItem => item.UniversityInfo.Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Programme.Name)
