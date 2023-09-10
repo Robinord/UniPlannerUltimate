@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -47,6 +48,7 @@ namespace UniPlanner.Controllers
         }
 
         // GET: UniProgramme/Create
+        [Authorize]
         public IActionResult Create()
         {
             ViewData["ProgrammeID"] = new SelectList(_context.Programme, "ProgrammeID", "ProgrammeID");
@@ -59,6 +61,7 @@ namespace UniPlanner.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Create([Bind("UniProgrammeID,UniversityInfoID,ProgrammeID,Link,RankScore")] UniProgramme uniProgramme)
         {
             if (!ModelState.IsValid)
@@ -73,6 +76,7 @@ namespace UniPlanner.Controllers
         }
 
         // GET: UniProgramme/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.UniProgramme == null)
@@ -95,6 +99,7 @@ namespace UniPlanner.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Edit(int id, [Bind("UniProgrammeID,UniversityInfoID,ProgrammeID,Link,RankScore")] UniProgramme uniProgramme)
         {
             if (id != uniProgramme.UniProgrammeID)
@@ -128,6 +133,7 @@ namespace UniPlanner.Controllers
         }
 
         // GET: UniProgramme/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.UniProgramme == null)

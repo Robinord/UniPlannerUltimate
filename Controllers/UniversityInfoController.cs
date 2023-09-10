@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -46,6 +47,7 @@ namespace UniPlanner.Controllers
         }
 
         // GET: UniversityInfo/Create
+        [Authorize]
         public IActionResult Create()
         {
             return View();
@@ -56,6 +58,7 @@ namespace UniPlanner.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Create([Bind("UniversityInfoID,Name,City,Region,THErank,QSrank,ARWUrank")] UniversityInfo universityInfo)
         {
             if (!ModelState.IsValid)
@@ -68,6 +71,7 @@ namespace UniPlanner.Controllers
         }
 
         // GET: UniversityInfo/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.UniversityInfo == null)
@@ -88,6 +92,7 @@ namespace UniPlanner.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Edit(int id, [Bind("UniversityInfoID,Name,City,Region,THErank,QSrank,ARWUrank")] UniversityInfo universityInfo)
         {
             if (id != universityInfo.UniversityInfoID)
@@ -119,6 +124,7 @@ namespace UniPlanner.Controllers
         }
 
         // GET: UniversityInfo/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.UniversityInfo == null)
