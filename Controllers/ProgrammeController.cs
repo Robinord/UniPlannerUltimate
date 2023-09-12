@@ -21,11 +21,22 @@ namespace UniPlanner.Controllers
         }
 
         // GET: Programme
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string SearchString)
         {
-              return _context.Programme != null ? 
-                          View(await _context.Programme.ToListAsync()) :
-                          Problem("Entity set 'UniPlannerContext.Programme'  is null.");
+            if (_context.Programme == null)
+            {
+                return Problem("Entity set 'UniversityPlanner.Programme'  is null.");
+            }
+
+            var name = from n in _context.Programme
+                       select n;
+
+            if (!String.IsNullOrEmpty(SearchString))
+            {
+                name = name.Where(s => s.Name!.Contains(SearchString));
+            }
+
+            return View(await name.ToListAsync());
         }
 
         // GET: Programme/Details/5

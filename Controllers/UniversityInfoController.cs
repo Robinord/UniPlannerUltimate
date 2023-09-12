@@ -21,11 +21,22 @@ namespace UniPlanner.Controllers
         }
 
         // GET: UniversityInfo
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string SearchString)
         {
-              return _context.UniversityInfo != null ? 
-                          View(await _context.UniversityInfo.ToListAsync()) :
-                          Problem("Entity set 'UniPlannerContext.UniversityInfo'  is null.");
+            if (_context.UniversityInfo == null)
+            {
+                return Problem("Entity set 'UniversityPlanner.UniversityInfo'  is null.");
+            }
+
+            var name = from n in _context.UniversityInfo
+                         select n;
+
+            if (!String.IsNullOrEmpty(SearchString))
+            {
+                name = name.Where(s => s.Name!.Contains(SearchString));
+            }
+
+            return View(await name.ToListAsync());
         }
 
         // GET: UniversityInfo/Details/5

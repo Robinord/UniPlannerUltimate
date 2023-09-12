@@ -21,10 +21,23 @@ namespace UniPlanner.Controllers
         }
 
         // GET: UniProgramme
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(String SearchString)
         {
-            var uniPlannerContext = _context.UniProgramme.Include(u => u.Programme).Include(u => u.UniversityInfo);
-            return View(await uniPlannerContext.ToListAsync());
+            if (_context.UniProgramme == null)
+            {
+                return Problem("Entity set 'UniversityPlanner.UniProgramme'  is null.");
+            }
+
+
+            var name = from n in _context.UniProgramme.Include(u => u.Programme).Include(u => u.UniversityInfo)
+                select n;
+
+            if (!String.IsNullOrEmpty(SearchString))
+            {
+                name = name.Where(s => s.Programme.Name!.Contains(SearchString));
+
+            }
+            return View(await name.ToListAsync());
         }
 
         // GET: UniProgramme/Details/5

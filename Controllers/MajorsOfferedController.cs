@@ -22,10 +22,26 @@ namespace UniPlanner.Controllers
         }
 
         // GET: MajorsOffered
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int SearchInt)
         {
-            var uniPlannerContext = _context.MajorsOffered.Include(m => m.UniProgramme);
-            return View(await uniPlannerContext.ToListAsync());
+
+            if (_context.MajorsOffered == null)
+            {
+                return Problem("Entity set 'UniversityPlanner.MajorsOffered'  is null.");
+            }
+
+
+            var name = from n in _context.MajorsOffered.Include(m => m.UniProgramme)
+            select n;
+
+            
+
+            if (SearchInt != 0)
+            {
+                name = name.Where(s => s.UniProgrammeID! == SearchInt);
+
+            }
+            return View(await name.ToListAsync());
         }
 
         // GET: MajorsOffered/Details/5
