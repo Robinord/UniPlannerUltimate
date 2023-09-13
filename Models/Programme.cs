@@ -6,6 +6,7 @@ namespace UniPlanner.Models
 {
     public class Programme
     {
+        [Display(Name = "Programme ID")]
         public int ProgrammeID { get; set; }
         public string Name { get; set; }
 

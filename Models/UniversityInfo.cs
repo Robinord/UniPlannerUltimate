@@ -8,6 +8,8 @@ namespace UniPlanner.Models
         public string Name { get; set; }
         public string City { get; set; }
         public string Region { get; set; }
+
+        [Display(Name ="THE Rank")]
         public int THErank { get; set; }
         public int QSrank { get; set; }
         public int ARWUrank { get; set; }
