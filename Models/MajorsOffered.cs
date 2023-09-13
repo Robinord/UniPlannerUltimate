@@ -5,9 +5,9 @@ namespace UniPlanner.Models
     public class MajorsOffered
     {
         [Key]
-        [Display(Name = "MajorsOfferedID")]
+        [Display(Name = "MajorsOffered ID")]
         public int MajorsOfferedID { get; set; }
-        [Display(Name = "UniProgrammeID")]
+        [Display(Name = "UniProgramme ID")]
         public int UniProgrammeID { get; set; }   
         public  string Name { get; set; }
         public string Link { get; set; }
