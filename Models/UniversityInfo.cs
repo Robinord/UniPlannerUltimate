@@ -11,7 +11,9 @@ namespace UniPlanner.Models
 
         [Display(Name ="THE Rank")]
         public int THErank { get; set; }
+        [Display(Name = "THE Rank")]
         public int QSrank { get; set; }
+
         public int ARWUrank { get; set; }
 
         public ICollection<UniProgramme> UniProgrammes { get; set; }
