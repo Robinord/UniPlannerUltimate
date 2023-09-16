@@ -72,14 +72,12 @@ namespace UniPlanner.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
-            [StringLength(255, ErrorMessage = "Enter a valid name of less than 255 characters", MinimumLength = 1)]
+            [RegularExpression(@"^[a-zA-Z''-'\s]{1,40}$", ErrorMessage = "Enter a valid name")]
             [Display(Name = "Firstname")]
-            [RegularExpression("^0-9", ErrorMessage = "Name is not valid.")]
             public string FirstName { get; set;}
 
             [Required]
-            [StringLength(255, ErrorMessage = "Enter a valid name of less than 255 characters", MinimumLength = 1)]
-            [RegularExpression("^0-9", ErrorMessage = "Name is not valid.")]
+            [RegularExpression(@"^[a-zA-Z''-'\s]{1,40}$", ErrorMessage = "Enter a valid name")]
             [Display(Name = "Lastname")]
             public string LastName { get; set; }
             /// <summary>
