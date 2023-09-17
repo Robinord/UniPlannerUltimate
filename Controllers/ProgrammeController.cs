@@ -31,7 +31,7 @@ namespace UniPlanner.Controllers
             var name = from n in _context.Programme
                        select n;
 
-            if (!String.IsNullOrEmpty(SearchString))
+            if (!String.IsNullOrEmpty(SearchString)) //filter feature
             {
                 name = name.Where(s => s.Name!.Contains(SearchString));
             }

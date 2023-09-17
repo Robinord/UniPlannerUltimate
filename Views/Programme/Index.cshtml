@@ -10,6 +10,7 @@
     <a asp-action="Create">Create New</a>
 </p>
 
+<!--Form for Search button linking to index method in the controller-->
 <form asp-controller="Programme" asp-action="Index">
     <p>
         Name: <input type="text" name="SearchString" />
@@ -32,7 +33,8 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
-            <td>
+                <td>
+                    <!--CUD operation links to appropriate view pages-->
                 <a asp-action="Edit" asp-route-id="@item.ProgrammeID">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.ProgrammeID">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.ProgrammeID">Delete</a>

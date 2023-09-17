@@ -74,8 +74,9 @@ namespace UniPlanner.Areas.Identity.Pages.Account
             [Required]
             [RegularExpression(@"^[a-zA-Z''-'\s]{1,40}$", ErrorMessage = "Enter a valid name")]
             [Display(Name = "Firstname")]
-            public string FirstName { get; set;}
-
+            public string FirstName { get; set;} 
+            //Displays name fields along with appropraite validation so numbers can't be added
+            //Also doesn't let the name be longer than 40 characters
             [Required]
             [RegularExpression(@"^[a-zA-Z''-'\s]{1,40}$", ErrorMessage = "Enter a valid name")]
             [Display(Name = "Lastname")]

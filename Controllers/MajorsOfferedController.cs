@@ -36,7 +36,7 @@ namespace UniPlanner.Controllers
 
             
 
-            if (SearchInt != 0)
+            if (SearchInt != 0) //filter feature changed to int
             {
                 name = name.Where(s => s.UniProgrammeID! == SearchInt);
 

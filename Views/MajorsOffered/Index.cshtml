@@ -10,7 +10,8 @@
     <a asp-action="Create">Create New</a>
 </p>
 
-<form asp-controller="MajorsOffered" asp-action="Index">
+<!--Form for Search button linking to index method in the controller-->
+<form asp-controller="MajorsOffered" asp-action="Index">  
     <p>
         UniProgrammeID: <input type="number" name="SearchInt" />
         <input type="submit" value="Filter" />
@@ -32,13 +33,15 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
+                <td>
+                    <!--Anchor to follow link to university's page-->
                     <a href=@Html.DisplayFor(modelItem => item.Link)>@Html.DisplayFor(modelItem => item.Name)</a>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.UniProgramme.UniProgrammeID)
             </td>
-            <td>
+                <td>
+                    <!--CUD operation links to appropriate view pages-->
                 <a asp-action="Edit" asp-route-id="@item.MajorsOfferedID">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.MajorsOfferedID">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.MajorsOfferedID">Delete</a>

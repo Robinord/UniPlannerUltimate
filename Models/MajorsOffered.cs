@@ -4,6 +4,8 @@ namespace UniPlanner.Models
 {
     public class MajorsOffered
     {
+
+        //Child table of UniProgrammes
         [Key]
         [Display(Name = "MajorsOffered ID")]
         public int MajorsOfferedID { get; set; }
@@ -12,6 +14,8 @@ namespace UniPlanner.Models
         public  string Name { get; set; }
         public string Link { get; set; }
         [Display(Name = "UniProgramme ID")]
+
+        //Foreign Key linking to Parent table of UniProgrammes
         public UniProgramme UniProgramme { get; set; }
     }
 }

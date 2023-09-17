@@ -21,7 +21,7 @@ namespace UniPlanner.Controllers
         }
 
         // GET: UniProgramme
-        public async Task<IActionResult> Index(String SearchString)
+        public async Task<IActionResult> Index(String SearchString) 
         {
             if (_context.UniProgramme == null)
             {
@@ -32,7 +32,7 @@ namespace UniPlanner.Controllers
             var name = from n in _context.UniProgramme.Include(u => u.Programme).Include(u => u.UniversityInfo)
                 select n;
 
-            if (!String.IsNullOrEmpty(SearchString))
+            if (!String.IsNullOrEmpty(SearchString)) //filter feature
             {
                 name = name.Where(s => s.Programme.Name!.Contains(SearchString));
 
