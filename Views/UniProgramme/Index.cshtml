@@ -5,11 +5,12 @@
 }
 
 <h1>Programmes Offered List</h1>
-
+@if (User.Identity.IsAuthenticated)
+                    {
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-
+                    }
 <!--Form for Search button linking to index method in the controller-->
 <form asp-controller="UniProgramme" asp-action="Index">
     <p>
