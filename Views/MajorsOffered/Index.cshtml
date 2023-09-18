@@ -2,6 +2,8 @@
 
 @{
     ViewData["Title"] = "MajorsOffered";
+    @using Microsoft.AspNetCore.Authorization
+    @inject IAuthorizationService AuthorizationService
 }
 
 <h1>Majors Offered List</h1>
@@ -42,9 +44,13 @@
             </td>
                 <td>
                     <!--CUD operation links to appropriate view pages-->
-                <a asp-action="Edit" asp-route-id="@item.MajorsOfferedID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.MajorsOfferedID">Details</a> |
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                <a asp-action="Edit" asp-route-id="@item.MajorsOfferedID">Edit</a> 
+                
                 <a asp-action="Delete" asp-route-id="@item.MajorsOfferedID">Delete</a>
+                    }
+                    <a asp-action="Details" asp-route-id="@item.MajorsOfferedID">Details</a>
             </td>
         </tr>
 }

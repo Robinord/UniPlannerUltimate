@@ -2,6 +2,8 @@
 
 @{
     ViewData["Title"] = "UniversityInfo";
+    @using Microsoft.AspNetCore.Authorization
+    @inject IAuthorizationService AuthorizationService
 }
 
 <h1>University Information</h1>
@@ -63,9 +65,13 @@
                 @Html.DisplayFor(modelItem => item.ARWUrank)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.UniversityInfoID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.UniversityInfoID">Details</a> |
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                <a asp-action="Edit" asp-route-id="@item.UniversityInfoID">Edit</a> 
+                
                 <a asp-action="Delete" asp-route-id="@item.UniversityInfoID">Delete</a>
+                    }
+                    <a asp-action="Details" asp-route-id="@item.UniversityInfoID">Details</a>
             </td>
         </tr>
 }
