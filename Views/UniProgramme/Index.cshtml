@@ -5,7 +5,7 @@
 }
 
 <h1>Programmes Offered List</h1>
-@if (User.Identity.IsAuthenticated)
+@if (User.IsInRole("Admin"))
                     {
 <p>
     <a asp-action="Create">Create New</a>
@@ -55,7 +55,7 @@
             </td>
                 <td>
                     <!--CUD operation links to appropriate view pages-->
-                    @if (User.Identity.IsAuthenticated)
+                    @if (User.IsInRole("Admin"))
                     {
                 <a asp-action="Edit" asp-route-id="@item.UniProgrammeID">Edit</a> 
                 

@@ -257,7 +257,7 @@ namespace UniPlanner.Migrations
 
                     b.HasIndex("UniProgrammeID");
 
-                    b.ToTable("MajorsOffered");
+                    b.ToTable("MajorsOffered", (string)null);
                 });
 
             modelBuilder.Entity("UniPlanner.Models.Programme", b =>
@@ -274,7 +274,7 @@ namespace UniPlanner.Migrations
 
                     b.HasKey("ProgrammeID");
 
-                    b.ToTable("Programme");
+                    b.ToTable("Programme", (string)null);
                 });
 
             modelBuilder.Entity("UniPlanner.Models.UniProgramme", b =>
@@ -304,7 +304,7 @@ namespace UniPlanner.Migrations
 
                     b.HasIndex("UniversityInfoID");
 
-                    b.ToTable("UniProgramme");
+                    b.ToTable("UniProgramme", (string)null);
                 });
 
             modelBuilder.Entity("UniPlanner.Models.UniversityInfo", b =>
@@ -338,7 +338,7 @@ namespace UniPlanner.Migrations
 
                     b.HasKey("UniversityInfoID");
 
-                    b.ToTable("UniversityInfo");
+                    b.ToTable("UniversityInfo", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

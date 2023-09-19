@@ -7,7 +7,7 @@
 }
 
 <h1>University Information</h1>
-@if (User.Identity.IsAuthenticated)
+@if (User.IsInRole("Admin"))
                     {
 <p>
     <a asp-action="Create">Create New</a>
@@ -66,7 +66,7 @@
                 @Html.DisplayFor(modelItem => item.ARWUrank)
             </td>
             <td>
-                    @if (User.Identity.IsAuthenticated)
+                    @if (User.IsInRole("Admin"))
                     {
                 <a asp-action="Edit" asp-route-id="@item.UniversityInfoID">Edit</a> 
                 
