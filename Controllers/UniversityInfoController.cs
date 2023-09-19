@@ -11,10 +11,11 @@ using UniPlanner.Models;
 
 namespace UniPlanner.Controllers
 {
+    [Authorize]
     public class UniversityInfoController : Controller
-    {
+    { 
         private readonly UniPlannerContext _context;
-
+        
         public UniversityInfoController(UniPlannerContext context)
         {
             _context = context;
@@ -58,7 +59,7 @@ namespace UniPlanner.Controllers
         }
 
         // GET: UniversityInfo/Create
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
@@ -69,7 +70,7 @@ namespace UniPlanner.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create([Bind("UniversityInfoID,Name,City,Region,THErank,QSrank,ARWUrank")] UniversityInfo universityInfo)
         {
             if (!ModelState.IsValid)
@@ -82,7 +83,7 @@ namespace UniPlanner.Controllers
         }
 
         // GET: UniversityInfo/Edit/5
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.UniversityInfo == null)
@@ -103,7 +104,7 @@ namespace UniPlanner.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int id, [Bind("UniversityInfoID,Name,City,Region,THErank,QSrank,ARWUrank")] UniversityInfo universityInfo)
         {
             if (id != universityInfo.UniversityInfoID)
@@ -135,7 +136,7 @@ namespace UniPlanner.Controllers
         }
 
         // GET: UniversityInfo/Delete/5
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.UniversityInfo == null)

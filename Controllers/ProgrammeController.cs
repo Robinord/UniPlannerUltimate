@@ -10,9 +10,10 @@ using UniPlanner.Areas.Identity.Data;
 using UniPlanner.Models;
 
 namespace UniPlanner.Controllers
-{
+{  [Authorize]
     public class ProgrammeController : Controller
     {
+        
         private readonly UniPlannerContext _context;
 
         public ProgrammeController(UniPlannerContext context)
@@ -58,7 +59,7 @@ namespace UniPlanner.Controllers
         }
 
         // GET: Programme/Create
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
@@ -81,7 +82,7 @@ namespace UniPlanner.Controllers
         }
 
         // GET: Programme/Edit/5
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Programme == null)
@@ -133,7 +134,7 @@ namespace UniPlanner.Controllers
         }
 
         // GET: Programme/Delete/5
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Programme == null)

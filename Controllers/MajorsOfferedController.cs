@@ -10,10 +10,11 @@ using UniPlanner.Areas.Identity.Data;
 using UniPlanner.Models;
 
 namespace UniPlanner.Controllers
-{
+{  [Authorize]
     
     public class MajorsOfferedController : Controller
     {
+        
         private readonly UniPlannerContext _context;
 
         public MajorsOfferedController(UniPlannerContext context)
@@ -64,7 +65,7 @@ namespace UniPlanner.Controllers
         }
 
         // GET: MajorsOffered/Create
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             ViewData["UniProgrammeID"] = new SelectList(_context.UniProgramme, "UniProgrammeID", "UniProgrammeID");
@@ -90,7 +91,7 @@ namespace UniPlanner.Controllers
         }
 
         // GET: MajorsOffered/Edit/5
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.MajorsOffered == null)
@@ -112,7 +113,7 @@ namespace UniPlanner.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int id, [Bind("MajorsOfferedID,UniProgrammeID,Name,Link")] MajorsOffered majorsOffered)
         {
             if (id != majorsOffered.MajorsOfferedID)
@@ -145,7 +146,7 @@ namespace UniPlanner.Controllers
         }
 
         // GET: MajorsOffered/Delete/5
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.MajorsOffered == null)
