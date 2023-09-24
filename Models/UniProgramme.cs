@@ -11,6 +11,7 @@ namespace UniPlanner.Models
         public int UniversityInfoID { get; set; }
         [Display(Name = "Programme ID")]
         public  int ProgrammeID { get; set; }
+        [Display(Name = "Programme Link")]
         public  string Link { get; set; }
         //RankScore can not be more than 320 or less than 0
         [Range(0, 320, ErrorMessage = "Please enter correct value")]

@@ -23,9 +23,6 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.UniProgrammeID)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Link)
             </th>
             <th>
@@ -40,9 +37,6 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UniProgrammeID)
-                </td>
                 <td>
                     <!--Anchor to follow link to university's page-->
                     <a href=@Html.DisplayFor(modelItem => item.Link)>@Html.DisplayFor(modelItem => item.Programme.Name)</a>
