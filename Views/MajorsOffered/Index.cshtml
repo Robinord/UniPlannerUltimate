@@ -30,6 +30,9 @@
             <th>
                 Programme
             </th>
+            <th>
+                University
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -43,6 +46,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.UniProgramme.Programme.Name)
             </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UniProgramme.UniversityInfo.Name)
+                </td>
                 <td>
                     <!--CUD operation links to appropriate view pages-->
                     @if (User.IsInRole("Admin"))

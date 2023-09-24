@@ -33,7 +33,7 @@ namespace UniPlanner.Controllers
             }
 
 
-            var name = from n in _context.MajorsOffered.Include(m => m.UniProgramme).Include(m => m.UniProgramme.Programme)
+            var name = from n in _context.MajorsOffered.Include(m => m.UniProgramme).Include(m => m.UniProgramme.Programme).Include(m => m.UniProgramme.UniversityInfo)
             select n;
 
             
