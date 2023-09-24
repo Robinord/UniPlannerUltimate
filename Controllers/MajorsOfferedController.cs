@@ -40,7 +40,7 @@ namespace UniPlanner.Controllers
 
             if (!String.IsNullOrEmpty(SearchString)) //filter feature changed to int
             {
-                name = name.Where(s => s.UniProgramme.Programme.Name!.Contains(SearchString));
+                name = name.Where(s => s.UniProgramme.Programme.Name == SearchString);
 
             }
             return View(await name.ToListAsync());
