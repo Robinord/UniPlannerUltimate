@@ -12,6 +12,7 @@ namespace UniPlanner.Models
         [Display(Name = "UniProgramme ID")]
         public int UniProgrammeID { get; set; }   
         public  string Name { get; set; }
+        [Display(Name = "Major Link")]
         public string Link { get; set; }
         [Display(Name = "UniProgramme ID")]
 
