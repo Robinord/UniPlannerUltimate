@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using UniPlanner.Areas.Identity.Data;
 using UniPlanner.Models;
 
@@ -23,7 +24,7 @@ namespace UniPlanner.Controllers
         }
 
         // GET: MajorsOffered
-        public async Task<IActionResult> Index(int SearchInt)
+        public async Task<IActionResult> Index(string SearchString)
         {
 
             if (_context.MajorsOffered == null)
@@ -37,9 +38,9 @@ namespace UniPlanner.Controllers
 
             
 
-            if (SearchInt != 0) //filter feature changed to int
+            if (!String.IsNullOrEmpty(SearchString)) //filter feature changed to int
             {
-                name = name.Where(s => s.UniProgrammeID! == SearchInt);
+                name = name.Where(s => s.UniProgramme.Programme.Name!.Contains(SearchString));
 
             }
             return View(await name.ToListAsync());
