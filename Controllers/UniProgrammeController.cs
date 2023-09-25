@@ -65,8 +65,8 @@ namespace UniPlanner.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
-            ViewData["ProgrammeID"] = new SelectList(_context.Programme, "ProgrammeID", "ProgrammeID");
-            ViewData["UniversityInfoID"] = new SelectList(_context.UniversityInfo, "UniversityInfoID", "UniversityInfoID");
+            ViewData["ProgrammeID"] = new SelectList(_context.Programme, "ProgrammeID", "Name");
+            ViewData["UniversityInfoID"] = new SelectList(_context.UniversityInfo, "UniversityInfoID", "Name");
             return View();
         }
 

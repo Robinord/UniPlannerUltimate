@@ -6,18 +6,18 @@
 
 <h1>Create</h1>
 
-<h4>UniProgramme</h4>
+<h4>Programmes Offered</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="UniversityInfoID" class="control-label"></label>
+                <label asp-for="UniversityInfoID" class="control-label">University Name</label>
                 <select asp-for="UniversityInfoID" class ="form-control" asp-items="ViewBag.UniversityInfoID"></select>
             </div>
             <div class="form-group">
-                <label asp-for="ProgrammeID" class="control-label"></label>
+                <label asp-for="ProgrammeID" class="control-label">Programme Name</label>
                 <select asp-for="ProgrammeID" class ="form-control" asp-items="ViewBag.ProgrammeID"></select>
             </div>
             <div class="form-group">
