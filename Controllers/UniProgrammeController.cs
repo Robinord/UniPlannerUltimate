@@ -103,8 +103,8 @@ namespace UniPlanner.Controllers
             {
                 return NotFound();
             }
-            ViewData["ProgrammeID"] = new SelectList(_context.Programme, "ProgrammeID", "ProgrammeID", uniProgramme.ProgrammeID);
-            ViewData["UniversityInfoID"] = new SelectList(_context.UniversityInfo, "UniversityInfoID", "UniversityInfoID", uniProgramme.UniversityInfoID);
+            ViewData["ProgrammeID"] = new SelectList(_context.Programme, "ProgrammeID", "Name", uniProgramme.ProgrammeID);
+            ViewData["UniversityInfoID"] = new SelectList(_context.UniversityInfo, "UniversityInfoID", "Name", uniProgramme.UniversityInfoID);
             return View(uniProgramme);
         }
 
