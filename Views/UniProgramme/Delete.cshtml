@@ -15,7 +15,7 @@
             @Html.DisplayNameFor(model => model.Link)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Link)
+            <a href=@Html.DisplayFor(model => model.Link)>@Html.DisplayFor(model => model.Programme.Name)</a>
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.RankScore)
@@ -27,14 +27,9 @@
             @Html.DisplayNameFor(model => model.UniversityInfo)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UniversityInfo.UniversityInfoID)
+            @Html.DisplayFor(model => model.UniversityInfo.Name)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Programme)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Programme.ProgrammeID)
-        </dd>
+
     </dl>
     
     <form asp-action="Delete">
