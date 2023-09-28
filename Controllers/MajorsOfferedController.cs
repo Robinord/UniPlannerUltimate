@@ -116,8 +116,16 @@ namespace UniPlanner.Controllers
             {
                 return NotFound();
             }
-            ViewData["UniProgrammeID"] = new SelectList(_context.UniProgramme, "UniProgrammeID", "UniProgrammeID", majorsOffered.UniProgrammeID);
-            return View(majorsOffered);
+            var uniProgramme = _context.UniProgramme.Include(u => u.Programme).Include(u => u.UniversityInfo)
+                                .Select(s => new
+                                {
+                                    Text = s.Programme.Name + " | " + s.UniversityInfo.Name,
+                                    Value = s.UniProgrammeID
+
+                                }
+                                );
+            ViewData["UniProgrammeID"] = new SelectList(uniProgramme, "Value", "Text");
+            return View();
         }
 
         // POST: MajorsOffered/Edit/5
