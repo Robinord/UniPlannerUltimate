@@ -14,6 +14,7 @@ namespace UniPlanner.Models
         [Display(Name = "Major Name")]
         public  string Name { get; set; }
         [Display(Name = "Major Link")]
+        [RegularExpression(@"((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)", ErrorMessage = "Not a valid website URL")]
         public string Link { get; set; }
        
 
