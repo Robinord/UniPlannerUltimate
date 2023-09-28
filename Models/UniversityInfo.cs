@@ -4,6 +4,7 @@ namespace UniPlanner.Models
 {
     public class UniversityInfo
     {
+        [Display(Name = "University Info ID")]
         public int UniversityInfoID { get; set; }
         public string Name { get; set; }
         public string City { get; set; }

@@ -5,7 +5,7 @@ namespace UniPlanner.Models
     public class UniProgramme
     {
         //Display names added so that the actual names still follow conventions
-        [Display(Name = "UniProgramme ID")]
+        [Display(Name = "Programmes Offered ID")]
         public int UniProgrammeID { get; set; }
         [Display(Name = "UniversityInfo ID")]
         public int UniversityInfoID { get; set; }
@@ -20,9 +20,9 @@ namespace UniPlanner.Models
 
 
         //Foreign Keys linking to parent Tables
-        [Display(Name = "University Name")]
+        
         public UniversityInfo UniversityInfo { get; set; }
-        [Display(Name = "Programme Name")]
+        
         public Programme Programme { get; set; }
 
         //Foreign Key linking to Child Table MajorsOffered
