@@ -117,15 +117,15 @@ namespace UniPlanner.Controllers
                 return NotFound();
             }
             var uniProgramme = _context.UniProgramme.Include(u => u.Programme).Include(u => u.UniversityInfo)
-                                .Select(s => new
-                                {
-                                    Text = s.Programme.Name + " | " + s.UniversityInfo.Name,
-                                    Value = s.UniProgrammeID
+                    .Select(s => new
+                    {
+                        Text = s.Programme.Name + " | " + s.UniversityInfo.Name,
+                        Value = s.UniProgrammeID
 
-                                }
-                                );
+                    }
+                    );
             ViewData["UniProgrammeID"] = new SelectList(uniProgramme, "Value", "Text");
-            return View();
+            return View(majorsOffered);
         }
 
         // POST: MajorsOffered/Edit/5
