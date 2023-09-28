@@ -69,8 +69,19 @@ namespace UniPlanner.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
-            ViewData["UniProgrammeID"] = new SelectList(_context.UniProgramme, "UniProgrammeID", "UniProgrammeID");
-            return View();
+            // var uniProgramme = (from c in _context.UniProgramme.Include(u => u.Programme).Include(u => u.UniversityInfo) 
+            //                select new SelectListItem 
+            //               { Text = k.Programme.Name + "|" + k.UniversityInfo.Name, Value = k.UniProgrammeID.ToString() });
+            var uniProgramme = _context.UniProgramme.Include(u => u.Programme).Include(u => u.UniversityInfo)
+                                .Select(s => new
+                                {
+                                    Text = s.Programme.Name + " | " + s.UniversityInfo.Name,
+                                    Value = s.UniProgrammeID
+
+                                }
+                                );
+            ViewData["UniProgrammeID"] = new SelectList(uniProgramme, "Value", "Text");
+           return View();
         }
 
         // POST: MajorsOffered/Create
