@@ -174,8 +174,7 @@ namespace UniPlanner.Controllers
                 return NotFound();
             }
 
-            var majorsOffered = await _context.MajorsOffered
-                .Include(m => m.UniProgramme)
+            var majorsOffered = await _context.MajorsOffered.Include(m => m.UniProgramme).Include(m => m.UniProgramme.Programme).Include(m => m.UniProgramme.UniversityInfo)
                 .FirstOrDefaultAsync(m => m.MajorsOfferedID == id);
             if (majorsOffered == null)
             {
