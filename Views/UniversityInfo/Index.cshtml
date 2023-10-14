@@ -24,22 +24,22 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSort"]">@Html.DisplayNameFor(model => model.Name)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.City)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["CitySort"]">@Html.DisplayNameFor(model => model.City)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Region)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["RegionSort"]">@Html.DisplayNameFor(model => model.Region)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.THErank)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["THErankSort"]">@Html.DisplayNameFor(model => model.THErank)</a>
+            </th>
+            <th></a>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["QSrankSort"]">@Html.DisplayNameFor(model => model.QSrank)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.QSrank)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ARWUrank)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["ARWUrankSort"]">@Html.DisplayNameFor(model => model.ARWUrank)</a>
             </th>
             <th></th>
         </tr>

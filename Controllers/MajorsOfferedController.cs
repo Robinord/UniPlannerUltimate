@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using UniPlanner.Areas.Identity.Data;
@@ -24,8 +25,11 @@ namespace UniPlanner.Controllers
         }
 
         // GET: MajorsOffered
-        public async Task<IActionResult> Index(string SearchString)
+        public async Task<IActionResult> Index(string sortOrder, string SearchString)
         {
+            ViewData["nameSort"] = sortOrder == "name" ? "name_desc" : "name";
+            ViewData["programmeSort"] = sortOrder == "programme" ? "programme_desc" : "programme";
+            ViewData["universitySort"] = sortOrder == "university" ? "university_desc" : "university";
 
             if (_context.MajorsOffered == null)
             {
@@ -42,6 +46,34 @@ namespace UniPlanner.Controllers
             {
                 name = name.Where(s => s.Name!.Contains(SearchString));
             }
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    name = name.OrderByDescending(s => s.Name);
+                    break;
+
+                case "programme_desc":
+                    name = name.OrderByDescending(s => s.UniProgramme.Programme.Name);
+                    break;
+                case "university_desc":
+                    name = name.OrderByDescending(s => s.UniProgramme.UniversityInfo.Name);
+                    break;
+                case "name":
+                    name = name.OrderBy(s => s.Name);
+                    break;
+
+                case "programme":
+                    name = name.OrderBy(s => s.UniProgramme.Programme.Name);
+                    break;
+                case "university":
+                    name = name.OrderBy(s => s.UniProgramme.UniversityInfo.Name);
+                    break;
+
+                default:
+                    break;
+            }
+
             return View(await name.ToListAsync());
         }
 

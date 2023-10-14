@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using UniPlanner.Areas.Identity.Data;
 using UniPlanner.Models;
@@ -22,8 +23,16 @@ namespace UniPlanner.Controllers
         }
 
         // GET: UniversityInfo
-        public async Task<IActionResult> Index(string SearchString)
+        public async Task<IActionResult> Index(string sortOrder, string SearchString)
         {
+
+            ViewData["NameSort"] = sortOrder == "name" ? "name_desc" : "name";
+            ViewData["CitySort"] = sortOrder == "city" ? "city_desc" : "city";
+            ViewData["RegionSort"] = sortOrder == "region" ? "region_desc" : "region";
+            ViewData["THErankSort"] = sortOrder == "THErank" ? "THErank_desc" : "THErank";
+            ViewData["QSrankSort"] = sortOrder == "QSrank" ? "QSrank_desc" : "QSrank";
+            ViewData["ARWUrankSort"] = sortOrder == "ARWUrank" ? "ARWUrank_desc" : "ARWUrank";
+           
             if (_context.UniversityInfo == null)
             {
                 return Problem("Entity set 'UniversityPlanner.UniversityInfo'  is null.");
@@ -37,6 +46,47 @@ namespace UniPlanner.Controllers
                 name = name.Where(s => s.Name!.Contains(SearchString));
             }
 
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    name = name.OrderByDescending(s => s.Name);
+                    break;
+                case "city_desc":
+                    name = name.OrderByDescending(s => s.City);
+                    break;
+                case "region_desc":
+                    name = name.OrderByDescending(s => s.Region);
+                    break;
+                case "THErank_desc":
+                    name = name.OrderByDescending(s => s.THErank);
+                    break;
+                case "QSrank_desc":
+                    name = name.OrderByDescending(s => s.QSrank);
+                    break;
+                case "ARWUrank_desc":
+                    name = name.OrderByDescending(s => s.ARWUrank);
+                    break;
+                case "name":
+                    name = name.OrderBy(s => s.Name);
+                    break;
+                case "city":
+                    name = name.OrderBy(s => s.City);
+                    break;
+                case "region":
+                    name = name.OrderBy(s => s.Region);
+                    break;
+                case "THErank":
+                    name = name.OrderBy(s => s.THErank);
+                    break;
+                case "QSrank":
+                    name = name.OrderBy(s => s.QSrank);
+                    break;
+                case "ARWUrank":
+                    name = name.OrderBy(s => s.ARWUrank);
+                    break;
+                default:
+                    break;
+            }
             return View(await name.ToListAsync());
         }
 

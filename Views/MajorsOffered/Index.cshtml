@@ -25,13 +25,13 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Link)
+                 <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSort"]">@Html.DisplayNameFor(model => model.Link)</a>
             </th>
             <th>
-                Programme
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["programmeSort"]">Programme</a>
             </th>
             <th>
-                University
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["universitySort"]">University</a>
             </th>
             <th></th>
         </tr>

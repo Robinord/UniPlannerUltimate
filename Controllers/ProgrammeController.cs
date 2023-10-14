@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using UniPlanner.Areas.Identity.Data;
 using UniPlanner.Models;
@@ -22,8 +23,10 @@ namespace UniPlanner.Controllers
         }
 
         // GET: Programme
-        public async Task<IActionResult> Index(string SearchString)
+        public async Task<IActionResult> Index(string sortOrder, string SearchString)
         {
+            ViewData["NameSort"] = sortOrder == "name" ? "name_desc" : "name";
+
             if (_context.Programme == null)
             {
                 return Problem("Entity set 'UniversityPlanner.Programme'  is null.");
@@ -35,6 +38,20 @@ namespace UniPlanner.Controllers
             if (!String.IsNullOrEmpty(SearchString)) //filter feature
             {
                 name = name.Where(s => s.Name!.Contains(SearchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    name = name.OrderByDescending(s => s.Name);
+                    break;
+               
+                case "name":
+                    name = name.OrderBy(s => s.Name);
+                    break;
+
+                default:
+                    break;
             }
 
             return View(await name.ToListAsync());
