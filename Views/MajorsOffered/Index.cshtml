@@ -1,4 +1,4 @@
-﻿@model IEnumerable<UniPlanner.Models.MajorsOffered>
+﻿@model PaginatedList<UniPlanner.Models.MajorsOffered>
 
 @{
     ViewData["Title"] = "MajorsOffered";
@@ -25,13 +25,13 @@
     <thead>
         <tr>
             <th>
-                 <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSort"]">@Html.DisplayNameFor(model => model.Link)</a>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSort"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Link</a>
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["programmeSort"]">Programme</a>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["programmeSort"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Programme</a>
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["universitySort"]">University</a>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["universitySort"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">University</a>
             </th>
             <th></th>
         </tr>
@@ -65,3 +65,24 @@
 }
     </tbody>
 </table>
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex - 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @prevDisabled">
+    Previous
+</a>
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex + 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @nextDisabled">
+    Next
+</a>
+

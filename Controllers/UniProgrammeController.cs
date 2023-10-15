@@ -23,8 +23,13 @@ namespace UniPlanner.Controllers
         }
 
         // GET: UniProgramme
-        public async Task<IActionResult> Index(string sortOrder, string SearchString) 
+        public async Task<IActionResult> Index(
+    string sortOrder,
+    string currentFilter,
+    string SearchString,
+    int? pageNumber)
         {
+            ViewData["CurrentSort"] = sortOrder;
             ViewData["nameSort"] = sortOrder == "name" ? "name_desc" : "name";
             ViewData["rankScoreSort"] = sortOrder == "rankScore" ? "rankScore_desc" : "rankScore";
             ViewData["universitySort"] = sortOrder == "university" ? "university_desc" : "university";
@@ -34,6 +39,14 @@ namespace UniPlanner.Controllers
                 return Problem("Entity set 'UniversityPlanner.UniProgramme'  is null.");
             }
 
+            if (SearchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                SearchString = currentFilter;
+            }
 
             var name = from n in _context.UniProgramme.Include(u => u.Programme).Include(u => u.UniversityInfo)
                 select n;
@@ -68,7 +81,10 @@ namespace UniPlanner.Controllers
                 default:
                     break;
             }
-            return View(await name.ToListAsync());
+            
+
+            int pageSize = 10;
+            return View(await PaginatedList<UniProgramme>.CreateAsync(name.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
         // GET: UniProgramme/Details/5

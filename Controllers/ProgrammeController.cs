@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -23,13 +24,28 @@ namespace UniPlanner.Controllers
         }
 
         // GET: Programme
-        public async Task<IActionResult> Index(string sortOrder, string SearchString)
+        public async Task<IActionResult> Index(
+     string sortOrder,
+     string currentFilter,
+     string SearchString,
+     int? pageNumber)
         {
+
+            ViewData["CurrentSort"] = sortOrder;
             ViewData["NameSort"] = sortOrder == "name" ? "name_desc" : "name";
 
             if (_context.Programme == null)
             {
                 return Problem("Entity set 'UniversityPlanner.Programme'  is null.");
+            }
+
+            if (SearchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                SearchString = currentFilter;
             }
 
             var name = from n in _context.Programme
@@ -53,8 +69,8 @@ namespace UniPlanner.Controllers
                 default:
                     break;
             }
-
-            return View(await name.ToListAsync());
+            int pageSize = 10;
+            return View(await PaginatedList<Programme>.CreateAsync(name.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
         // GET: Programme/Details/5

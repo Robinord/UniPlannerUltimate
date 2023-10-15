@@ -23,9 +23,13 @@ namespace UniPlanner.Controllers
         }
 
         // GET: UniversityInfo
-        public async Task<IActionResult> Index(string sortOrder, string SearchString)
+        public async Task<IActionResult> Index(
+    string sortOrder,
+    string currentFilter,
+    string SearchString,
+    int? pageNumber)
         {
-
+            ViewData["CurrentSort"] = sortOrder;
             ViewData["NameSort"] = sortOrder == "name" ? "name_desc" : "name";
             ViewData["CitySort"] = sortOrder == "city" ? "city_desc" : "city";
             ViewData["RegionSort"] = sortOrder == "region" ? "region_desc" : "region";
@@ -36,6 +40,15 @@ namespace UniPlanner.Controllers
             if (_context.UniversityInfo == null)
             {
                 return Problem("Entity set 'UniversityPlanner.UniversityInfo'  is null.");
+            }
+
+            if (SearchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                SearchString = currentFilter;
             }
 
             var name = from n in _context.UniversityInfo
@@ -87,7 +100,8 @@ namespace UniPlanner.Controllers
                 default:
                     break;
             }
-            return View(await name.ToListAsync());
+            int pageSize = 10;
+            return View(await PaginatedList<UniversityInfo>.CreateAsync(name.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
         // GET: UniversityInfo/Details/5

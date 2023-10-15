@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -25,8 +26,14 @@ namespace UniPlanner.Controllers
         }
 
         // GET: MajorsOffered
-        public async Task<IActionResult> Index(string sortOrder, string SearchString)
+        public async Task<IActionResult> Index(
+    string sortOrder,
+    string currentFilter,
+    string SearchString,
+    int? pageNumber)
         {
+
+            ViewData["CurrentSort"] = sortOrder;
             ViewData["nameSort"] = sortOrder == "name" ? "name_desc" : "name";
             ViewData["programmeSort"] = sortOrder == "programme" ? "programme_desc" : "programme";
             ViewData["universitySort"] = sortOrder == "university" ? "university_desc" : "university";
@@ -35,6 +42,16 @@ namespace UniPlanner.Controllers
             {
                 return Problem("Entity set 'UniversityPlanner.MajorsOffered'  is null.");
             }
+
+            if (SearchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                SearchString = currentFilter;
+            }
+
 
 
             var name = from n in _context.MajorsOffered.Include(m => m.UniProgramme).Include(m => m.UniProgramme.Programme).Include(m => m.UniProgramme.UniversityInfo)
@@ -73,8 +90,8 @@ namespace UniPlanner.Controllers
                 default:
                     break;
             }
-
-            return View(await name.ToListAsync());
+            int pageSize = 10;
+            return View(await PaginatedList<MajorsOffered>.CreateAsync(name.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
         // GET: MajorsOffered/Details/5
